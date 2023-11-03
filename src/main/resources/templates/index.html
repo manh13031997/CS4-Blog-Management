@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .menu {
+            border: 1px solid;
+            display: flex;
+            column-gap: 20px;
+            padding: 10px;
+        }
+
+        .item {
+            font-size: 30px;
+        }
+
+        .main {
+            height: 800px;
+            display: flex;
+            column-gap: 20px;
+            padding: 10px;
+        }
+
+        .sidebar {
+            width: 30%;
+            height: 800px;
+            font-size: 30px;
+            border: 1px solid;
+            display: flex;
+            flex-wrap: wrap;
+
+        }
+
+        .category {
+            overflow: auto; /* Tạo thanh cuộn khi nội dung vượt quá khung */
+            max-height: 400px; /* Đặt chiều cao tối đa của ô chứa */
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .content {
+            width: 70%;
+            height: 800px;
+            font-size: 30px;
+            border: 1px solid;
+        }
+
+        .table {
+            border-collapse: collapse;
+            border: 1px solid;
+            margin-top: 25px
+        }
+
+        .col {
+            border: 1px solid;
+            padding: 0;
+        }
+
+        .categoryBottom {
+            display: flex;
+            position: fixed;
+            z-index: 5;
+            column-gap: 100px;
+            background-color: black;
+            color: aliceblue;
+            width: 100%;
+        }
+
+
+    </style>
+    <!--    <script src="script.js"></script>-->
+
+</head>
+<body>
+<div class="all" id="allView">
+    <div class="menu">
+        <div class="item" onclick="loadListBlog()">Blog</div>
+        <div class="item" onclick="loadListUser()">User</div>
+        <div class="item" onclick="loadFormAdd()">Add</div>
+    </div>
+    <div class="main">
+        <div class="content" id="posts"></div>
+        <div class="sidebar" id="sidebar">
+            <div class="blog" id="blog"></div>
+            <div class="blog" id="blogRemove"></div>
+        </div>
+    </div>
+    <div class="foot" id="userViews"></div>
+</div>
+<div onclick="test123()">blog dành cho người già</div>
+<script>
+    const API_URL = 'http://localhost:8080/blog'
+    const API_URL_USER = 'http://localhost:8080/comment'
+    const API_URL_POSTS = 'http://localhost:8080/user'
+    loadListBlog()
+    loadListBlogRemove()
+    // loadListPosts()
+    function test123() {
+        const apiUrl = 'https://online-gateway.ghn.vn/shiip/public-api/master-data/province';
+        const token = '42b2a2e7-7862-11ee-b394-8ac29577e80e';
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        axios.get(apiUrl, config)
+            .then((response) => {
+                // Dữ liệu trả về từ API nằm trong response.data
+                console.log('Dữ liệu từ API:', response.data);
+            })
+            .catch((error) => {
+                console.error('Lỗi khi lấy dữ liệu từ API:', error);
+            });
+    }
+    function loadListBlog() {
+        document.getElementById('posts').innerHTML = ""
+            axios.get(API_URL).then((res) => {
+                let list = res.data;
+                let str = `<div class="blogBottom">
+                                <div class="blog-navbar">List blog</div>
+                                <div class="blog-navbar" onclick="createBlog()">Create blog</div>
+                            </div>
+                       <table class="table">
+                            <tr>
+                                <td class="col">#</td>
+                                <td class="col">title blog</td>
+                                <td class="col">content blog</td>
+                                <td class="col" colspan="2">Action</td>
+                            </tr>`
+                for (let i = 0; i < list.length; i++) {
+                    str += `<tr>
+                            <td class="col" id="idBlog" >${list[i].id}</td>
+                            <td class="col" id="titleBlog">${list[i].title}</td>
+                            <td class="col" onclick="editBlog(${list[i].id})" style="color: red">Edit</td>
+                            <td class="col" onclick="deleteBlog(${list[i].id})" style="color: red">Delete</td>
+                        </tr>`
+
+                }
+                str += '</table>'
+                document.getElementById('posts').innerHTML = str
+            })
+    }
+
+    function createBlog() {
+        document.getElementById('blog').innerHTML =
+            `<input type="text" id="nameBlog">
+            <button onclick="saveNewBlog()">Create</button>`
+    }
+
+    function saveNewBlog() {
+        let data = {
+            name: document.getElementById('nameBlog').value
+        }
+
+        axios.post(API_URL, data).then(() => {
+            loadListBlog();
+        });
+    }
+
+
+    function editBlog(id) {
+        axios.get(API_URL + '/' + id).then((res) => {
+            let blog = res.data;
+            document.getElementById('blog').innerHTML =
+                `<input type="hidden" id="idEditBlog" value="${blog.id}">` +
+                `<input type="text" id="titleEditBlog" value="${blog.title}">` +
+                `<input type="text" id="contentEditBlog" value="${blog.content}">` +
+                `<button onclick="saveEditBlog(${blog.id})">Save</button>`
+        })
+
+    }
+    function saveEditBlog(id) {
+        let data = {
+            idCategory: document.getElementById('idEditBlog').value,
+            title: document.getElementById('titleEditBlog').value,
+            content: document.getElementById('contentEditBlog').value,
+        }
+        axios.put(API_URL + '/' + id, data).then(() => {
+            loadListBlog();
+            loadListBlogRemove();
+        });
+    }
+    function deleteBlog(id) {
+        axios.delete(API_URL + '/' + id).then(() => {
+            loadListBlog();
+            loadListBlogRemove();
+        });
+    }
+
+    function loadListBlogRemove() {
+        document.getElementById('blogRemove').innerHTML =
+            axios.get(API_URL + '/blog').then((res) => {
+                let list = res.data;
+                let str = `<div class="blogBottom">
+                                <div class="blog-navbar">List Category Remove</div>
+                            </div>
+                       <table class="table">
+                            <tr>
+                                <td class="col">#</td>
+                                <td class="col">title</td>
+                                <td class="col">content</td>
+                                <td class="col">Action</td>
+                            </tr>`
+                for (let i = 0; i < list.length; i++) {
+                    str += `<tr>
+                            <td class="col" id="idBlogRemove" >${list[i].id}</td>
+                            <td class="col" id="nameBlogRemove">${list[i].name}</td>
+                            <td class="col" onclick="restoreBlog(${list[i].id})" style="color: red">Restore</td>
+                        </tr>`
+                }
+                str += '</table>'
+                document.getElementById('blogRemove').innerHTML = str
+            })
+    }
+
+    function restoreBlog(id) {
+        axios.put(API_URL + '/restore/' + id).then(() => {
+            loadListBlog();
+            loadListBlogRemove();
+        });
+    }
+</script>
+</body>
+</html>

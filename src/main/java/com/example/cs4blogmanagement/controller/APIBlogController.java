@@ -3,6 +3,7 @@ package com.example.cs4blogmanagement.controller;
 
 import com.example.cs4blogmanagement.model.Blog;
 import com.example.cs4blogmanagement.service.posts.IBlogService;
+import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,14 @@ public class APIBlogController {
         }
         return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
-
+    @GetMapping("/categoryIllegal")
+    public ResponseEntity<Iterable<Blog>> showAllCategoryIllegal() {
+        List<Blog> categoryList = (List<Blog>) blogService.findAll();
+        if (categoryList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Blog> findPostsById(@PathVariable Long id) {
         Optional<Blog> postsOptional = blogService.findById(id);
@@ -45,10 +53,11 @@ public class APIBlogController {
     }
 
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<Blog> updatePosts(@PathVariable Long id, @RequestBody Blog blog) {
-        Optional<Blog> postsOptional = blogService.findById(id);
-        if (!postsOptional.isPresent()) {
+    public ResponseEntity<Blog> updateBlog(@PathVariable Long id, @RequestBody Blog blog) {
+        Optional<Blog> blogOptional = blogService.findById(id);
+        if (!blogOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         blog.setId(id);
@@ -58,8 +67,8 @@ public class APIBlogController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Blog> deletePosts(@PathVariable Long id) {
-        Optional<Blog> postsOptional = blogService.findById(id);
-        if (!postsOptional.isPresent()) {
+        Optional<Blog> blogOptional = blogService.findById(id);
+        if (!blogOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         blogService.remove(id);
