@@ -24,4 +24,13 @@ public class APIUserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user){
+        User user1 = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        if (user1 != null){
+            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Username or password is incorrect", HttpStatus.OK);
+        }
+    }
 }
