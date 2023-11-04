@@ -23,7 +23,6 @@
      }).then(() => {
          alert("Register successful!!!")
          redirectToLoginForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/loginForm/loginForm.html?_ijt=shuescjtqi2g4iagmfd3pq5h4r&_ij_reload=RELOAD_ON_SAVE")
-
      })
  }
 
