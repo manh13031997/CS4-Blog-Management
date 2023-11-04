@@ -245,31 +245,31 @@
         });
     }
 
-    function loadListBlogRemove() {
-        document.getElementById('blogRemove').innerHTML =
-            axios.get(API_URL + '/blog').then((res) => {
-                let list = res.data;
-                let str = `<div class="blogBottom">
-                                <div class="blog-navbar">List Category Remove</div>
-                            </div>
-                       <table class="table">
-                            <tr>
-                                <td class="col">#</td>
-                                <td class="col">title</td>
-                                <td class="col">content</td>
-                                <td class="col">Action</td>
-                            </tr>`
-                for (let i = 0; i < list.length; i++) {
-                    str += `<tr>
-                            <td class="col" id="idBlogRemove" >${list[i].id}</td>
-                            <td class="col" id="nameBlogRemove">${list[i].name}</td>
-                            <td class="col" onclick="restoreBlog(${list[i].id})" style="color: red">Restore</td>
-                        </tr>`
-                }
-                str += '</table>'
-                document.getElementById('blogRemove').innerHTML = str
-            })
-    }
+    // function loadListBlogRemove() {
+    //     document.getElementById('blogRemove').innerHTML =
+    //         axios.get(API_URL + '/blog').then((res) => {
+    //             let list = res.data;
+    //             let str = `<div class="blogBottom">
+    //                             <div class="blog-navbar">List Category Remove</div>
+    //                         </div>
+    //                    <table class="table">
+    //                         <tr>
+    //                             <td class="col">#</td>
+    //                             <td class="col">title</td>
+    //                             <td class="col">content</td>
+    //                             <td class="col">Action</td>
+    //                         </tr>`
+    //             for (let i = 0; i < list.length; i++) {
+    //                 str += `<tr>
+    //                         <td class="col" id="idBlogRemove" >${list[i].id}</td>
+    //                         <td class="col" id="nameBlogRemove">${list[i].name}</td>
+    //                         <td class="col" onclick="restoreBlog(${list[i].id})" style="color: red">Restore</td>
+    //                     </tr>`
+    //             }
+    //             str += '</table>'
+    //             document.getElementById('blogRemove').innerHTML = str
+    //         })
+    // }
 
     function restoreBlog(id) {
         axios.put(API_URL + '/restore/' + id).then(() => {
