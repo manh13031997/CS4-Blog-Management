@@ -2,7 +2,9 @@ package com.example.cs4blogmanagement.controller;
 
 
 import com.example.cs4blogmanagement.model.Blog;
+import com.example.cs4blogmanagement.model.User;
 import com.example.cs4blogmanagement.service.posts.IBlogService;
+import com.example.cs4blogmanagement.service.user.IUserService;
 import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,8 @@ public class APIBlogController {
     @Autowired
     IBlogService blogService;
 
+    @Autowired
+    IUserService userService;
     @GetMapping("")
     public ResponseEntity<Iterable<Blog>> showAllBlog() {
         List<Blog> blogList = (List<Blog>) blogService.findAll();
@@ -34,6 +38,12 @@ public class APIBlogController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
+    }
+    @GetMapping("/getAllBlogByUser/{id}")
+    public List<Blog> getAllBlogByUser(@PathVariable Long id) {
+        Optional<User> user = userService.findById(id);
+        List<Blog> postsOptional = blogService.findAllByIdUser(user.get());
+        return (postsOptional);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Blog> findPostsById(@PathVariable Long id) {

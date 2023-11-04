@@ -1,5 +1,8 @@
 package com.example.cs4blogmanagement.service;
 
+import com.example.cs4blogmanagement.model.Blog;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface IGeneralService<T> {
