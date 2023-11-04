@@ -1,5 +1,5 @@
  function login(){
-    axios.post("http://localhost:8082/users/login", {
+    axios.post("http://localhost:8080/users/login", {
         username: document.getElementById("usn").value,
         password: document.getElementById("pas").value
     }).then(response => {
@@ -13,6 +13,20 @@
     })
 }
 
+ function register(){
+     axios.post("http://localhost:8080/users/register", {
+         username: document.getElementById("usn").value,
+         age: document.getElementById("age").value,
+         address: document.getElementById("address").value,
+         email: document.getElementById("email").value,
+         password: document.getElementById("password").value
+     }).then(() => {
+         alert("Register successful!!!")
+
+     })
+ }
+
  function reloadPage(){
      location.reload();
  }
+
