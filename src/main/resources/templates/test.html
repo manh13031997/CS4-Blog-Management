@@ -1,271 +1,271 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <title>Title</title>-->
-<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>-->
-<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"-->
-<!--        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">-->
-<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"-->
-<!--          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"-->
-<!--          crossorigin="anonymous"></script>-->
-<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"-->
-<!--          integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"-->
-<!--          crossorigin="anonymous"></script>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+          crossorigin="anonymous"></script>
 
-<!--  <style>-->
-
-
-<!--  </style>-->
-<!--  &lt;!&ndash;    <script src="script.js"></script>&ndash;&gt;-->
-
-<!--</head>-->
-<!--<body>-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--  <a class="navbar-brand" href="#">Blog</a>-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
-
-<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--    <ul class="navbar-nav mr-auto">-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link" href="http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/index.html?_ijt=b9la6abauvvsqrbled8hm3dkue&_ij_reload=RELOAD_ON_SAVE">Home <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#">-->
-<!--          Create blog-->
-<!--        </a>-->
-<!--      </li>-->
-<!--      <li class="nav-item dropdown">-->
-<!--        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">-->
-<!--          Dropdown-->
-<!--        </a>-->
-<!--        <div class="dropdown-menu">-->
-<!--          <a class="dropdown-item" href="#">Action</a>-->
-<!--          <a class="dropdown-item" href="#">Another action</a>-->
-<!--          <div class="dropdown-divider"></div>-->
-<!--          <a class="dropdown-item" href="#">Something else here</a>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      &lt;!&ndash;            <li class="nav-item">&ndash;&gt;-->
-<!--      &lt;!&ndash;                <a class="nav-link"></a>&ndash;&gt;-->
-<!--      &lt;!&ndash;            </li>&ndash;&gt;-->
-<!--    </ul>-->
-<!--    <form class="form-inline my-2 my-lg-0">-->
-<!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</nav>-->
-<!--<div class="container mt-5">-->
-<!--  <div id="posts"></div>-->
-<!--</div>-->
-<!--<script>-->
-<!--  const API_URL = 'http://localhost:8080/blog'-->
-<!--  const API_URL_USER = 'http://localhost:8080/comment'-->
-<!--  const API_URL_POSTS = 'http://localhost:8080/user'-->
-<!--  loadListBlog()-->
-<!--  loadListBlogRemove()-->
-<!--  const data = {}-->
-<!--  // loadListPosts()-->
-<!--  function test123() {-->
-<!--    const apiUrl = 'https://online-gateway.ghn.vn/shiip/public-api/master-data/province';-->
-<!--    const token = '42b2a2e7-7862-11ee-b394-8ac29577e80e';-->
-<!--    const config = {-->
-<!--      headers: {-->
-<!--        'Authorization': `Bearer ${token}`-->
-<!--      }-->
-<!--    };-->
-<!--    axios.get(apiUrl, config)-->
-<!--            .then((response) => {-->
-<!--              // Dữ liệu trả về từ API nằm trong response.data-->
-<!--              console.log('Dữ liệu từ API:', response.data);-->
-<!--            })-->
-<!--            .catch((error) => {-->
-<!--              console.error('Lỗi khi lấy dữ liệu từ API:', error);-->
-<!--            });-->
-<!--  }-->
-<!--  function loadListBlog() {-->
-<!--    document.getElementById('posts').innerHTML = ""-->
-<!--    axios.get(API_URL).then((res) => {-->
-<!--      let list = res.data;-->
-<!--      let str = `<div class="blogBottom">-->
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--          <span aria-hidden="true">&times;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <form>-->
-<!--  <div class="form-group">-->
-<!--    <label for="exampleInputEmail1">Title</label>-->
-<!--    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">-->
-<!--  </div>-->
-<!--  <div class="form-group">-->
-<!--    <label for="exampleInputPassword1">Content</label>-->
-<!--    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-<!--  </div>-->
-<!--</form>-->
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--        <button type="button" class="btn btn-primary">Save changes</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--                            </div>-->
-<!--                       <table class="table" style="width: 600px">-->
-<!--&lt;!&ndash;                            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th scope="row" class="col" style="width: 50px ">#</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th class="col">title blog</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th class="col">content blog</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th class="col">username</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <th class="col" colspan="2">Action</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
-<!--`-->
-<!--      for (let i = 0; i < list.length; i++) {-->
-<!--        str += `<tr>-->
-<!--                            <td >-->
-<!--                            <div>-->
-<!--                            <h4>${list[i].user.username}</h4>-->
-<!--                            <h5>${list[i].title}</h5>-->
-<!--                            <p>${list[i].content}</p>-->
-<!--                            <form action="">-->
-<!--                            <div class="form-group" style="display: flex">-->
-<!--                        <input type="text" class="form-control" id="titleEditBlog" aria-describedby="emailHelp" placeholder="Viết bình luận">-->
-<!--                        <button type="button" class="btn btn-primary">Gửi</button>-->
-<!--                      </div>-->
-<!--</form>-->
-<!--</div>-->
-<!--</td>-->
-<!--                        </tr>`-->
-
-<!--      }-->
-<!--      str += '</table>' +-->
-<!--              '<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +-->
-<!--              '  <div class="modal-dialog">\n' +-->
-<!--              '    <div class="modal-content">\n' +-->
-<!--              '      <div class="modal-header">\n' +-->
-<!--              '        <h5 class="modal-title" id="exampleModalLabel">Modal title ưeafsedf</h5>\n' +-->
-<!--              '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +-->
-<!--              '          <span aria-hidden="true">&times;</span>\n' +-->
-<!--              '        </button>\n' +-->
-<!--              '      </div>\n' +-->
-<!--              '      <div class="modal-body">\n' +-->
-<!--              '        ' +-->
-<!--              '<form>\n' +-->
-<!--              '  <div class="form-group">\n' +-->
-<!--              '    <label for="exampleInputEmail1">Title</label>\n' +-->
-<!--              '    <input type="text" class="form-control" id="titleEditBlog" aria-describedby="emailHelp">\n' +-->
-<!--              '  </div>\n' +-->
-<!--              '  <div class="form-group">\n' +-->
-<!--              '    <label for="exampleInputPassword1">Content</label>\n' +-->
-
-<!--              '    <textarea class="form-control" id="contentEditBlog" rows="3"></textarea>\n' +-->
-<!--              '  </div>\n' +-->
-<!--              '  <button type="submit" class="btn btn-primary">Submit</button>\n' +-->
-<!--              '</form>' +-->
-<!--              '      </div>\n' +-->
-<!--              '      <div class="modal-footer">\n' +-->
-<!--              '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +-->
-<!--              '        <button type="button" class="btn btn-primary">Save changes</button>\n' +-->
-<!--              '      </div>\n' +-->
-<!--              '    </div>\n' +-->
-<!--              '  </div>\n' +-->
-<!--              '</div>'-->
-<!--      document.getElementById('posts').innerHTML = str-->
-<!--    })-->
-<!--  }-->
-
-<!--  function createBlog() {-->
-<!--    document.getElementById('blog').innerHTML =-->
-<!--            `<input type="text" id="nameBlog">-->
-<!--            <button onclick="saveNewBlog()">Create</button>`-->
-<!--  }-->
-
-<!--  function saveNewBlog() {-->
-<!--    let data = {-->
-<!--      name: document.getElementById('nameBlog').value-->
-<!--    }-->
-
-<!--    axios.post(API_URL, data).then(() => {-->
-<!--      loadListBlog();-->
-<!--    });-->
-<!--  }-->
+  <style>
 
 
-<!--  function editBlog(id) {-->
-<!--    axios.get(API_URL + '/' + id).then((res) => {-->
-<!--      $('#exampleModal1').on('shown.bs.modal', function () {-->
-<!--        document.getElementById('titleEditBlog').value = res.data.title;-->
-<!--      });-->
-<!--      $('#exampleModal1').on('shown.bs.modal', function () {-->
-<!--        document.getElementById('contentEditBlog').value = res.data.content;-->
-<!--      });-->
-<!--      // Hiển thị modal-->
-<!--      $('#exampleModal1').modal('show');-->
-<!--    })-->
+  </style>
+  <!--    <script src="script.js"></script>-->
 
-<!--  }-->
-<!--  function saveEditBlog(id) {-->
-<!--    let data = {-->
-<!--      idCategory: document.getElementById('idEditBlog').value,-->
-<!--      title: document.getElementById('titleEditBlog').value,-->
-<!--      content: document.getElementById('contentEditBlog').value,-->
-<!--    }-->
-<!--    axios.put(API_URL + '/' + id, data).then(() => {-->
-<!--      loadListBlog();-->
-<!--      loadListBlogRemove();-->
-<!--    });-->
-<!--  }-->
-<!--  function deleteBlog(id) {-->
-<!--    console.log(id)-->
-<!--    axios.delete(API_URL + '/' + id).then(() => {-->
-<!--      console.log(API_URL + '/' + id)-->
-<!--      loadListBlog();-->
-<!--      loadListBlogRemove();-->
-<!--    });-->
-<!--  }-->
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<!--  function loadListBlogRemove() {-->
-<!--    document.getElementById('blogRemove').innerHTML =-->
-<!--            axios.get(API_URL + '/blog').then((res) => {-->
-<!--              let list = res.data;-->
-<!--              let str = `<div class="blogBottom">-->
-<!--                                <div class="blog-navbar">List Category Remove</div>-->
-<!--                            </div>-->
-<!--                       <table class="table">-->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/test.html?_ijt=b9la6abauvvsqrbled8hm3dkue&_ij_reload=RELOAD_ON_SAVE">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#">
+          Create blog
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <!--            <li class="nav-item">-->
+      <!--                <a class="nav-link"></a>-->
+      <!--            </li>-->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="container mt-5">
+  <div id="posts"></div>
+</div>
+<script>
+  const API_URL = 'http://localhost:8080/blog'
+  const API_URL_USER = 'http://localhost:8080/comment'
+  const API_URL_POSTS = 'http://localhost:8080/user'
+  loadListBlog()
+  loadListBlogRemove()
+  const data = {}
+  // loadListPosts()
+  function test123() {
+    const apiUrl = 'https://online-gateway.ghn.vn/shiip/public-api/master-data/province';
+    const token = '42b2a2e7-7862-11ee-b394-8ac29577e80e';
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
+    axios.get(apiUrl, config)
+            .then((response) => {
+              // Dữ liệu trả về từ API nằm trong response.data
+              console.log('Dữ liệu từ API:', response.data);
+            })
+            .catch((error) => {
+              console.error('Lỗi khi lấy dữ liệu từ API:', error);
+            });
+  }
+  function loadListBlog() {
+    document.getElementById('posts').innerHTML = ""
+    axios.get(API_URL).then((res) => {
+      let list = res.data;
+      let str = `<div class="blogBottom">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Content</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+                            </div>
+                       <table class="table" style="width: 600px">
 <!--                            <tr>-->
-<!--                                <td class="col">#</td>-->
-<!--                                <td class="col">title</td>-->
-<!--                                <td class="col">content</td>-->
-<!--                                <td class="col">Action</td>-->
-<!--                            </tr>`-->
-<!--              for (let i = 0; i < list.length; i++) {-->
-<!--                str += `<tr>-->
-<!--                            <td class="col" id="idBlogRemove" >${list[i].id}</td>-->
-<!--                            <td class="col" id="nameBlogRemove">${list[i].name}</td>-->
-<!--                            <td class="col" onclick="restoreBlog(${list[i].id})" style="color: red">Restore</td>-->
-<!--                        </tr>`-->
-<!--              }-->
-<!--              str += '</table>'-->
-<!--              document.getElementById('blogRemove').innerHTML = str-->
-<!--            })-->
-<!--  }-->
+<!--                                <th scope="row" class="col" style="width: 50px ">#</th>-->
+<!--                                <th class="col">title blog</th>-->
+<!--                                <th class="col">content blog</th>-->
+<!--                                <th class="col">username</th>-->
+<!--                                <th class="col" colspan="2">Action</th>-->
+<!--                            </tr>-->
+`
+      for (let i = 0; i < list.length; i++) {
+        str += `<tr>
+                            <td >
+                            <div>
+                            <h4>${list[i].user.username}</h4>
+                            <h5>${list[i].title}</h5>
+                            <p>${list[i].content}</p>
+                            <form action="">
+                            <div class="form-group" style="display: flex">
+                        <input type="text" class="form-control" id="titleEditBlog" aria-describedby="emailHelp" placeholder="Viết bình luận">
+                        <button type="button" class="btn btn-primary">Gửi</button>
+                      </div>
+</form>
+</div>
+</td>
+                        </tr>`
 
-<!--  function restoreBlog(id) {-->
-<!--    axios.put(API_URL + '/restore/' + id).then(() => {-->
-<!--      loadListBlog();-->
-<!--      loadListBlogRemove();-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
+      }
+      str += '</table>' +
+              '<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
+              '  <div class="modal-dialog">\n' +
+              '    <div class="modal-content">\n' +
+              '      <div class="modal-header">\n' +
+              '        <h5 class="modal-title" id="exampleModalLabel">Modal title ưeafsedf</h5>\n' +
+              '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+              '          <span aria-hidden="true">&times;</span>\n' +
+              '        </button>\n' +
+              '      </div>\n' +
+              '      <div class="modal-body">\n' +
+              '        ' +
+              '<form>\n' +
+              '  <div class="form-group">\n' +
+              '    <label for="exampleInputEmail1">Title</label>\n' +
+              '    <input type="text" class="form-control" id="titleEditBlog" aria-describedby="emailHelp">\n' +
+              '  </div>\n' +
+              '  <div class="form-group">\n' +
+              '    <label for="exampleInputPassword1">Content</label>\n' +
+
+              '    <textarea class="form-control" id="contentEditBlog" rows="3"></textarea>\n' +
+              '  </div>\n' +
+              '  <button type="submit" class="btn btn-primary">Submit</button>\n' +
+              '</form>' +
+              '      </div>\n' +
+              '      <div class="modal-footer">\n' +
+              '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +
+              '        <button type="button" class="btn btn-primary">Save changes</button>\n' +
+              '      </div>\n' +
+              '    </div>\n' +
+              '  </div>\n' +
+              '</div>'
+      document.getElementById('posts').innerHTML = str
+    })
+  }
+
+  function createBlog() {
+    document.getElementById('blog').innerHTML =
+            `<input type="text" id="nameBlog">
+            <button onclick="saveNewBlog()">Create</button>`
+  }
+
+  function saveNewBlog() {
+    let data = {
+      name: document.getElementById('nameBlog').value
+    }
+
+    axios.post(API_URL, data).then(() => {
+      loadListBlog();
+    });
+  }
+
+
+  function editBlog(id) {
+    axios.get(API_URL + '/' + id).then((res) => {
+      $('#exampleModal1').on('shown.bs.modal', function () {
+        document.getElementById('titleEditBlog').value = res.data.title;
+      });
+      $('#exampleModal1').on('shown.bs.modal', function () {
+        document.getElementById('contentEditBlog').value = res.data.content;
+      });
+      // Hiển thị modal
+      $('#exampleModal1').modal('show');
+    })
+
+  }
+  function saveEditBlog(id) {
+    let data = {
+      idCategory: document.getElementById('idEditBlog').value,
+      title: document.getElementById('titleEditBlog').value,
+      content: document.getElementById('contentEditBlog').value,
+    }
+    axios.put(API_URL + '/' + id, data).then(() => {
+      loadListBlog();
+      loadListBlogRemove();
+    });
+  }
+  function deleteBlog(id) {
+    console.log(id)
+    axios.delete(API_URL + '/' + id).then(() => {
+      console.log(API_URL + '/' + id)
+      loadListBlog();
+      loadListBlogRemove();
+    });
+  }
+
+  function loadListBlogRemove() {
+    document.getElementById('blogRemove').innerHTML =
+            axios.get(API_URL + '/blog').then((res) => {
+              let list = res.data;
+              let str = `<div class="blogBottom">
+                                <div class="blog-navbar">List Category Remove</div>
+                            </div>
+                       <table class="table">
+                            <tr>
+                                <td class="col">#</td>
+                                <td class="col">title</td>
+                                <td class="col">content</td>
+                                <td class="col">Action</td>
+                            </tr>`
+              for (let i = 0; i < list.length; i++) {
+                str += `<tr>
+                            <td class="col" id="idBlogRemove" >${list[i].id}</td>
+                            <td class="col" id="nameBlogRemove">${list[i].name}</td>
+                            <td class="col" onclick="restoreBlog(${list[i].id})" style="color: red">Restore</td>
+                        </tr>`
+              }
+              str += '</table>'
+              document.getElementById('blogRemove').innerHTML = str
+            })
+  }
+
+  function restoreBlog(id) {
+    axios.put(API_URL + '/restore/' + id).then(() => {
+      loadListBlog();
+      loadListBlogRemove();
+    });
+  }
+</script>
+</body>
+</html>

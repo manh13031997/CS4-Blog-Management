@@ -39,6 +39,14 @@ public class APIBlogController {
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
+//    @GetMapping("/categoryIllegal")
+//    public ResponseEntity<Iterable<Blog>> showAllTestIllegal() {
+//        List<Blog> blogList = (List<Blog>) blogService.findAll();
+//        if (blogList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(blogList, HttpStatus.OK);
+//    }
 
     @PostMapping
     public  ResponseEntity<?> createBlog(@RequestBody Blog blog) {
