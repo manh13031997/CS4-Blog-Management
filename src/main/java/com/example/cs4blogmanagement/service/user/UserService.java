@@ -11,11 +11,11 @@ import java.util.Optional;
 public class UserService implements IUserService{
     @Autowired
     IUserRepository userRepository;
+
     @Override
     public Iterable<User> findAll() {
         return userRepository.findAll();
     }
-
 
     @Override
     public Optional<User> findById(Long id) {
@@ -29,9 +29,8 @@ public class UserService implements IUserService{
 
     @Override
     public void remove(Long id) {
-
+        userRepository.deleteById(id);
     }
-
 
     @Override
     public void save(User user) {
