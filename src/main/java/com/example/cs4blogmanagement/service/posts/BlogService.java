@@ -5,6 +5,7 @@ import com.example.cs4blogmanagement.repository.IBlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -29,8 +30,9 @@ public class BlogService implements IBlogService{
     }
 
     @Override
+    @Transactional
     public void remove(Long id) {
-
+        blogRepository.deleteById(id);
     }
 
 

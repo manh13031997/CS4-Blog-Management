@@ -66,7 +66,7 @@ public class APIBlogController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Blog> deletePosts(@PathVariable Long id) {
+    public ResponseEntity<?> deletePosts(@PathVariable Long id) {
         Optional<Blog> blogOptional = blogService.findById(id);
         if (!blogOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
