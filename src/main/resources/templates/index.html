@@ -105,17 +105,17 @@
         <form>
   <div class="form-group">
     <label for="exampleInputEmail1">Title</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="titleCreateBlog" aria-describedby="emailHelp">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Content</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" id="contentCreateBlog" rows="3"></textarea>
   </div>
 </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button onclick="saveNewBlog()" type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
       </div>
     </div>
   </div>
@@ -164,6 +164,7 @@
                     '        ' +
                     '<form>\n' +
                     '  <div class="form-group">\n' +
+                    '    <input type="hidden" class="form-control" id="idEditBlog" aria-describedby="emailHelp">\n' +
                     '    <label for="exampleInputEmail1">Title</label>\n' +
                     '    <input type="text" class="form-control" id="titleEditBlog" aria-describedby="emailHelp">\n' +
                     '  </div>\n' +
@@ -172,12 +173,11 @@
 
                     '    <textarea class="form-control" id="contentEditBlog" rows="3"></textarea>\n' +
                     '  </div>\n' +
-                    '  <button type="submit" class="btn btn-primary">Submit</button>\n' +
                     '</form>' +
                     '      </div>\n' +
                     '      <div class="modal-footer">\n' +
                     '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +
-                    '        <button type="button" class="btn btn-primary">Save changes</button>\n' +
+                    '        <button onclick="saveEditBlog()" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>\n' +
                     '      </div>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -193,8 +193,10 @@
     }
 
     function saveNewBlog() {
+        console.log(    API_URL)
         let data = {
-            name: document.getElementById('nameBlog').value
+            title: document.getElementById('titleCreateBlog').value,
+            content: document.getElementById('contentCreateBlog').value
         }
 
         axios.post(API_URL, data).then(() => {
@@ -209,6 +211,9 @@
                 document.getElementById('titleEditBlog').value = res.data.title;
             });
             $('#exampleModal1').on('shown.bs.modal', function () {
+                document.getElementById('idEditBlog').value = res.data.id;
+            });
+            $('#exampleModal1').on('shown.bs.modal', function () {
                 document.getElementById('contentEditBlog').value = res.data.content;
             });
             // Hiển thị modal
@@ -216,9 +221,12 @@
         })
 
     }
-    function saveEditBlog(id) {
-        let data = {
-            idCategory: document.getElementById('idEditBlog').value,
+
+
+    function saveEditBlog() {
+        let id = document.getElementById('idEditBlog').value
+        const data = {
+            // idCategory: document.getElementById('idEditBlog').value,
             title: document.getElementById('titleEditBlog').value,
             content: document.getElementById('contentEditBlog').value,
         }

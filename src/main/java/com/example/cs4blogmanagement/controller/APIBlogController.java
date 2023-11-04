@@ -39,6 +39,12 @@ public class APIBlogController {
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
+
+    @PostMapping
+    public  ResponseEntity<?> createBlog(@RequestBody Blog blog) {
+        blogService.save(blog);
+       return ResponseEntity.ok("tạo mới thành công");
+    }
     @GetMapping("/getAllBlogByUser/{id}")
     public List<Blog> getAllBlogByUser(@PathVariable Long id) {
         Optional<User> user = userService.findById(id);
