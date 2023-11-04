@@ -8,8 +8,11 @@
             localStorage.setItem("username", document.getElementById("usn").value)
         } else if (response.data === "Username or password is incorrect"){
             alert("Username or password is incorrect")
-
+            reloadPage()
         }
     })
 }
 
+ function reloadPage(){
+     location.reload();
+ }
