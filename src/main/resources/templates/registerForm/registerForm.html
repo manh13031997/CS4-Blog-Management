@@ -38,8 +38,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 
 			<div class="form-control w3layouts">
-				<input type="text" id="age" name="age" placeholder="Age" title="Please enter your Age" required="" >
-
+				<input type="text" id="age" name="age" placeholder="Age" title="Please enter your Age" required="" oninput="checkAgeFormat()">
+				<p id="ageError" style="color: red; display: none; text-align: center">The person's age must be a number</p>
 			</div>
 
 			<div class="form-control w3layouts">

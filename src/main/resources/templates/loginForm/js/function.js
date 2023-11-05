@@ -47,5 +47,14 @@
      window.location.href = url;
  }
 
+ function checkAgeFormat(){
+     let ageInput = document.getElementById("age").value;
+     let ageError = document.getElementById("ageError");
 
+     if (isNaN(ageInput)) {
+         ageError.style.display = 'block';
+     } else {
+         ageError.style.display = 'none';
+     }
+ }
 
