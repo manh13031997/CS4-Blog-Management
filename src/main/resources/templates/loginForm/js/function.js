@@ -58,3 +58,14 @@
      }
  }
 
+ function checkEmailFormat(){
+     let emailInput = document.getElementById("email").value;
+     let emailError = document.getElementById("emailError");
+     let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+     if (!regex.test(emailInput)) {
+         emailError.style.display = 'block';
+     } else {
+         emailError.style.display = 'none';
+     }
+ }
