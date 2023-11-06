@@ -3,11 +3,9 @@ package com.example.cs4blogmanagement.controller;
 
 import com.example.cs4blogmanagement.model.Blog;
 import com.example.cs4blogmanagement.model.User;
-<<<<<<< HEAD
+
 import com.example.cs4blogmanagement.service.post.IBlogService;
-=======
-import com.example.cs4blogmanagement.service.posts.IBlogService;
->>>>>>> 91937f5af1b68a94f45f673ef205378ebd88c8f5
+
 import com.example.cs4blogmanagement.service.user.IUserService;
 import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
