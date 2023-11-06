@@ -38,7 +38,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 
 			<div class="form-control w3layouts">
-				<input type="text" id="age" name="age" placeholder="Age" title="Please enter your Age" required="">
+				<input type="text" id="age" name="age" placeholder="Age" title="Please enter your Age" required="" oninput="checkAgeFormat()">
+				<p id="ageError" style="color: red; display: none; text-align: center">The person's age must be a number</p>
 			</div>
 
 			<div class="form-control w3layouts">
@@ -46,8 +47,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 
 			<div class="form-control w3layouts">	
-				<input type="email" id="email" name="email" placeholder="mail@example.com" title="Please enter a valid email" required="">
+				<input type="text" id="email" name="email" placeholder="mail@example.com" title="Please enter a valid email" required="" oninput="checkEmailFormat()">
+				<p id="emailError" style="color: red; display: none; text-align: center">Email is not in correct format</p>
 			</div>
+
 
 			<div class="form-control agileinfo">	
 				<input type="password" class="lock" name="password" placeholder="Password" id="password" required="">
