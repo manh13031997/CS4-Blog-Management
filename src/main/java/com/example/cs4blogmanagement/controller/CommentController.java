@@ -33,11 +33,7 @@ public class CommentController {
         }
         return new ResponseEntity<>(commentOptional.get(), HttpStatus.OK);
     }
-<<<<<<< HEAD
     //    @GetMapping("/find")
-=======
-//    @GetMapping("/find")
->>>>>>> 91937f5af1b68a94f45f673ef205378ebd88c8f5
 //    public ResponseEntity<Iterable<Comment>> findAllUserByName(@RequestParam String content) {
 //        List<Comment> commentList = (List<Comment>) commentService.findAllByName(content);
 //        if (userList.isEmpty()) {
@@ -65,8 +61,4 @@ public class CommentController {
         commentService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 91937f5af1b68a94f45f673ef205378ebd88c8f5
