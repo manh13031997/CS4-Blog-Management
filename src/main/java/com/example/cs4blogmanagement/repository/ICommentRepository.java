@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICommentRepository extends JpaRepository<Comment, Long> {
     Iterable<Comment> findAllByContentContaining(String content);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 91937f5af1b68a94f45f673ef205378ebd88c8f5
