@@ -26,8 +26,12 @@ public class APIUserController {
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody User user){
-        if (validate.validateEmail(user.getEmail()) && user.getAge() >= 1){
-            userService.save(user);
+        if (user.getAge() >= 1){
+            if (validate.validatePhoneNumber(user.getPhoneNumber())){
+                if (validate.validateEmail(user.getEmail())){
+                    userService.save(user);
+                }
+            }
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

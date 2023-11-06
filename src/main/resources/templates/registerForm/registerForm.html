@@ -46,6 +46,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<input type="text" id="address" name="address" placeholder="Address" title="Please enter your Address" required="">
 			</div>
 
+			<div class="form-control w3layouts">
+				<input type="text" id="phone" name="phone" placeholder="Phone Number" title="Please enter your phone number" required="" oninput="checkPhoneNumberFormat()">
+				<p id="phoneError" style="color: red; display: none; text-align: center">Phone number is not in correct format</p>
+			</div>
+
 			<div class="form-control w3layouts">	
 				<input type="text" id="email" name="email" placeholder="mail@example.com" title="Please enter a valid email" required="" oninput="checkEmailFormat()">
 				<p id="emailError" style="color: red; display: none; text-align: center">Email is not in correct format</p>
