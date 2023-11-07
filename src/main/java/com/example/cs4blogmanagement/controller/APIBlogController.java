@@ -42,7 +42,7 @@ public class APIBlogController {
     @PostMapping
     public  ResponseEntity<?> createBlog(@RequestBody Blog blog) {
         blogService.save(blog);
-       return ResponseEntity.ok("tạo mới thành công");
+        return ResponseEntity.ok("tạo mới thành công");
     }
     @GetMapping("/getAllBlogByUser/{id}")
     public List<Blog> getAllBlogByUser(@PathVariable Long id) {

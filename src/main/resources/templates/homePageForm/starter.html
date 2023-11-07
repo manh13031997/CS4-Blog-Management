@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/starter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Before We Begin</title>
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logo"><a href="#">Bloggin' Blog</a></div>
+        <ul class="links">
+            <li><a href="">Home</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">History</a></li>
+            <li><a href="">Notification</a></li>
+        </ul>
+        <div class="toggle-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+    <div class="dropdown-menu">
+        <li><a href="">Home</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">History</a></li>
+        <li><a href="">Notification</a></li>
+        <li><a href="" class="action-btn">Get Started</a></li>
+    </div>
+</header>
+<script>
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const toggleBtnIcon = document.querySelector('.toggle-btn i');
+    const dropDownMenu = document.querySelector('.dropdown-menu');
+    toggleBtn.onclick = function(){
+        dropDownMenu.classList.toggle('open');
+        const isOpen = dropDownMenu.classList.contains('open');
+        toggleBtnIcon.classList = isOpen;
+            ? 'fa-solid fa-xmark'
+            : 'fa-solid fa-bars'
+    }
+</script>
+<main>
+    <section id="welcome">
+        <h1>Welcome to Blogin' Blog</h1>
+        <h3>Before we can begin to enjoy all the service of this blog, please make sure to register yourself</h3>
+        <br>
+        <a href="http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/loginForm/loginForm.html?_ijt=v2j8c8sdr1fug2st2utejtsksd" class="action-btn">Login</a>
+        <br>
+        <a href="http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/registerForm/registerForm.html?_ijt=v2j8c8sdr1fug2st2utejtsksd" class="action-btn">Register</a>
+    </section>
+</main>
+</body>
+</html>

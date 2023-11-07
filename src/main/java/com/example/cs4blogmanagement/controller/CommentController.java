@@ -33,7 +33,7 @@ public class CommentController {
         }
         return new ResponseEntity<>(commentOptional.get(), HttpStatus.OK);
     }
-//    @GetMapping("/find")
+    //    @GetMapping("/find")
 //    public ResponseEntity<Iterable<Comment>> findAllUserByName(@RequestParam String content) {
 //        List<Comment> commentList = (List<Comment>) commentService.findAllByName(content);
 //        if (userList.isEmpty()) {
