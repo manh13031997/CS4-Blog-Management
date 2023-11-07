@@ -26,19 +26,24 @@ public class APIUserController {
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody User user){
-        if (validate.validateEmail(user.getEmail()) && user.getAge() >= 1){
-            userService.save(user);
+        if (user.getAge() >= 1){
+            if (validate.validatePhoneNumber(user.getPhoneNumber())){
+                if (validate.validateEmail(user.getEmail())){
+                    userService.save(user);
+                }
+            }
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user){
+    public ResponseEntity<User> login(@RequestBody User user){
         User user1 = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (user1 != null){
-            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+            return new ResponseEntity<>(user1, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Username or password is incorrect", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
         }
     }
+
 }
