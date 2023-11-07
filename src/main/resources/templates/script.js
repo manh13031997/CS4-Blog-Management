@@ -2,19 +2,17 @@
 let idLogin = localStorage.getItem("idLogin")
 console.log(idLogin)
 function logOut() {
-    redirectToForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/loginForm/loginForm.html?_ijt=shuescjtqi2g4iagmfd3pq5h4r&_ij_reload=RELOAD_ON_SAVE")
     deleteLocalStorage()
+    redirectToForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/loginForm/loginForm.html?_ijt=shuescjtqi2g4iagmfd3pq5h4r&_ij_reload=RELOAD_ON_SAVE")
 }
 
 function redirectToForm(url) {
     window.location.href = url;
 }
 
-// let usn = localStorage.getItem("username");
-// document.getElementById("user_name").innerText = 'Welcome, ' + usn + '!';
-
 function deleteLocalStorage() {
     localStorage.removeItem("username")
+    localStorage.removeItem("idLogin")
 }
 function loadUser() {
     axios.get("http://localhost:8080/" + "user" + idLogin).then((res) =>{
