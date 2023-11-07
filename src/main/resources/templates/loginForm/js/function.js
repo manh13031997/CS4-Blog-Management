@@ -6,6 +6,7 @@
         if (response.data === "Login successful"){
             alert("Login successful")
             localStorage.setItem("username", document.getElementById("usn").value)
+            redirectToForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/homePage/home.html?_ijt=4tf7pn328l2oef32g01kutl5k&_ij_reload=RELOAD_ON_SAVE")
         } else if (response.data === "Username or password is incorrect"){
             alert("Username or password is incorrect")
             reloadPage()
@@ -27,7 +28,7 @@
      }).then(() => {
          if (regex.test(email) && parseInt(age) >= 1) {
              alert("Register successful!!!")
-             redirectToLoginForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/loginForm/loginForm.html?_ijt=shuescjtqi2g4iagmfd3pq5h4r&_ij_reload=RELOAD_ON_SAVE")
+             redirectToForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/loginForm/loginForm.html?_ijt=shuescjtqi2g4iagmfd3pq5h4r&_ij_reload=RELOAD_ON_SAVE")
          } else if (parseInt(age) < 1 && regex.test(email) === false) {
              alert("Enter age greater than or equal to 1 and invalid email address!")
              reloadPage()
@@ -46,7 +47,7 @@
      location.reload();
  }
 
- function redirectToLoginForm(url) {
+ function redirectToForm(url) {
      window.location.href = url;
  }
 
