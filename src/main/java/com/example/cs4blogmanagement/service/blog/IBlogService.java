@@ -1,4 +1,4 @@
-package com.example.cs4blogmanagement.service.posts;
+package com.example.cs4blogmanagement.service.blog;
 
 
 import com.example.cs4blogmanagement.model.Blog;

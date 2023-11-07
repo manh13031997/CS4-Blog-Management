@@ -34,8 +34,8 @@ public class UserController {
         }
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
-    @GetMapping("/find")
-    public ResponseEntity<Iterable<User>> findAllUserByName(@RequestParam String name) {
+    @GetMapping("/find/{name}")
+    public ResponseEntity<Iterable<User>> findAllUserByName(@PathVariable String name) {
         List<User> userList = (List<User>) userService.findAllByName(name);
         if (userList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
