@@ -9,17 +9,16 @@ function login(){
         let naa = response.data.username;
         if (response.status === 200){
             alert("Login successful")
-            // let name = user.username
-            // let idd = user.id
-            // console.log(name,idd)
             localStorage.setItem("username", naa);//luu id dang nhap vao localstrorage
             localStorage.setItem("idLogin", id);
             redirectToForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/index.html?_ijt=c2q4jpdbiql6g4d86cabfl9dgk&_ij_reload=RELOAD_ON_SAVE")
         } else if (response.data === "Username or password is incorrect"){
+
             alert("Username or password is incorrect")
             reloadPage()
         }
     })
+
 }
 
  function register(){

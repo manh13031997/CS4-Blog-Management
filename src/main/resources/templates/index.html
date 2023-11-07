@@ -20,8 +20,7 @@
         }
 
     </style>
-    <script src="script.js"></script>
-    <script src="function.js" ></script>
+
     <!--    <script src="script.js"></script>-->
 
 </head>
@@ -63,7 +62,7 @@
         </form>-->
         <div class="right">
             <div style="margin-right: 10px">
-                <p id="a">aa</p>
+                <span id="nameUser"></span>
             </div>
             <button type="submit" onclick="logOut()">Logout</button>
         </div>
@@ -72,6 +71,7 @@
 <div class="container mt-5">
     <div id="posts"></div>
 </div>
+
 <script>
     const API_URL = 'http://localhost:8080/blog'
     const API_URL_USER = 'http://localhost:8080/comment'
@@ -98,6 +98,7 @@
             });
     }
     function loadListBlog() {
+        document.getElementById("nameUser").innerHTML = `<p>${localStorage.getItem("username")}</p>`;
         document.getElementById('posts').innerHTML = ""
             axios.get(API_URL).then((res) => {
                 let list = res.data;
@@ -215,7 +216,10 @@
         console.log(    API_URL)
         let data = {
             title: document.getElementById('titleCreateBlog').value,
-            content: document.getElementById('contentCreateBlog').value
+            content: document.getElementById('contentCreateBlog').value,
+            user:{
+                id: localStorage.getItem("idLogin")
+            }
         }
 
         axios.post(API_URL, data).then(() => {
@@ -297,5 +301,7 @@
         });
     }
 </script>
+<script src="script.js"></script>
+<script src="function.js" ></script>
 </body>
 </html>
