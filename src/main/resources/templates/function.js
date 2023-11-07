@@ -1,13 +1,15 @@
+// let idLogin = localStorage.getItem("idLogin");
+let userName = localStorage.getItem("username");
 function login(){
     axios.post("http://localhost:8080/users/login", {
         username: document.getElementById("usn").value,
         password: document.getElementById("pas").value
     }).then((response) => {
         let id = response.data.id;
-        let usn = response.data.username;
+        let naa = response.data.username;
         if (response.status === 200){
-            alert("Login successful")
-            localStorage.setItem("username", usn);//luu id dang nhap vao localstrorage
+            // alert("Login successful")
+            localStorage.setItem("username", naa);//luu id dang nhap vao localstrorage
             localStorage.setItem("idLogin", id);
             redirectToForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/index.html?_ijt=c2q4jpdbiql6g4d86cabfl9dgk&_ij_reload=RELOAD_ON_SAVE")
         } else {
@@ -15,6 +17,7 @@ function login(){
             reloadPage()
         }
     })
+
 }
 
  function register(){
