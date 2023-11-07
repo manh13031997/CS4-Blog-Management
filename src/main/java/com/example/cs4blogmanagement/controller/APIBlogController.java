@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,6 +82,7 @@ public class APIBlogController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         blog.setId(id);
+        blog.setTime(LocalDateTime.now());  // Lay ve thoi gian hien tai cua he thong, KDL khai bao bien bat buoc phai la LocalDateTime
         blogService.save(blog);
         return new ResponseEntity<>(HttpStatus.OK);
     }
