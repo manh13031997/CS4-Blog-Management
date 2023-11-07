@@ -40,16 +40,6 @@ public class APIBlogController {
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
-//    @GetMapping("/categoryIllegal")
-//    public ResponseEntity<Iterable<Blog>> showAllTestIllegal() {
-//        List<Blog> blogList = (List<Blog>) blogService.findAll();
-//        if (blogList.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(blogList, HttpStatus.OK);
-//    }
-
-
     @PostMapping
     public  ResponseEntity<?> createBlog(@RequestBody Blog blog) {
         blogService.save(blog);
@@ -61,6 +51,13 @@ public class APIBlogController {
         List<Blog> postsOptional = blogService.findAllByIdUser(user.get());
         return (postsOptional);
     }
+    @GetMapping("/getAllBlogUser/{id}")
+    public List<Blog> getAllBlogUser(@PathVariable Long id) {
+        Optional<User> user = userService.findById(id);
+        List<Blog> postsOptional = blogService.findAllByIdUser(user.get());
+        return (postsOptional);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Blog> findPostsById(@PathVariable Long id) {
         Optional<Blog> postsOptional = blogService.findById(id);
@@ -69,6 +66,7 @@ public class APIBlogController {
         }
         return new ResponseEntity<>(postsOptional.get(), HttpStatus.OK);
     }
+
     @GetMapping("/find")
     public ResponseEntity<Iterable<Blog>> findAllPostsByName(@RequestParam String name) {
         List<Blog> postsList = (List<Blog>) blogService.findAllByName(name);
@@ -77,9 +75,6 @@ public class APIBlogController {
         }
         return new ResponseEntity<>(postsList, HttpStatus.OK);
     }
-
-
-
     @PutMapping("/{id}")
     public ResponseEntity<Blog> updateBlog(@PathVariable Long id, @RequestBody Blog blog) {
         Optional<Blog> blogOptional = blogService.findById(id);

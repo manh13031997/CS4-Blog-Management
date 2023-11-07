@@ -56,10 +56,10 @@
 <!--                <a class="nav-link"></a>-->
 <!--            </li>-->
         </ul>
-    <!--    <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>-->
+<!--        <form class="form-inline my-2 my-lg-0" style="margin-right: 200px">-->
+<!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="yc">-->
+<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="timKiem()">Search</button>-->
+<!--        </form>-->
         <div class="right">
             <div style="margin-right: 10px">
                 <span id="nameUser"></span>
@@ -113,7 +113,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+
   <div class="form-group">
     <label for="exampleInputEmail1">Title</label>
     <input type="text" class="form-control" id="titleCreateBlog" aria-describedby="emailHelp">
@@ -122,7 +122,7 @@
     <label for="exampleInputPassword1">Content</label>
     <textarea class="form-control" id="contentCreateBlog" rows="3"></textarea>
   </div>
-</form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -159,7 +159,8 @@
                             <div style="display: flex">
                             <button onclick="editBlog(${list[i].id})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
                             Edit
-                    </button>
+                            </button>
+                             <button onclick="viewBlog(${list[i].id})" type="button" data-toggle="modal" data-target="#exampleModal12"> view </button>
                             <a href="" onclick="deleteBlog(${list[i].id})">
                             <button type="button" class="btn btn-danger">
                             Delete
@@ -182,7 +183,7 @@
                     '      </div>\n' +
                     '      <div class="modal-body">\n' +
                     '        ' +
-                    '<form>\n' +
+
                     '  <div class="form-group">\n' +
                     '    <input type="hidden" class="form-control" id="idEditBlog" aria-describedby="emailHelp">\n' +
                     '    <label for="exampleInputEmail1">Title</label>\n' +
@@ -193,7 +194,7 @@
 
                     '    <textarea class="form-control" id="contentEditBlog" rows="3"></textarea>\n' +
                     '  </div>\n' +
-                    '</form>' +
+
                     '      </div>\n' +
                     '      <div class="modal-footer">\n' +
                     '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +
@@ -203,14 +204,49 @@
                     '  </div>\n' +
                     '</div>'
                 document.getElementById('posts').innerHTML = str
+
+                str += '</table>' +
+                    '<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel12" aria-hidden="true">\n' +
+                    '  <div class="modal-dialog">\n' +
+                    '    <div class="modal-content">\n' +
+                    '      <div class="modal-header">\n' +
+                    '        <h5 class="modal-title" id="exampleModalLabel12">Edit blog</h5>\n' +
+                    '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+                    '          <span aria-hidden="true">&times;</span>\n' +
+                    '        </button>\n' +
+                    '      </div>\n' +
+                    '      <div class="modal-body">\n' +
+                    '        ' +
+
+                    '  <div class="form-group">\n' +
+                    '    <input type="hidden" class="form-control" id="idViewBlog" aria-describedby="emailHelp">\n' +
+                    '    <label for="exampleInputEmail12">Title</label>\n' +
+                    '    <input type="text" class="form-control" id="titleViewBlog">\n' +
+                    '  </div>\n' +
+                    '  <div class="form-group">\n' +
+                    '    <label for="exampleInputPassword1">Content</label>\n' +
+
+                    '    <textarea class="form-control" id="contentViewBlog" rows="3"></textarea>\n' +
+                    '  </div>\n' +
+
+                    '      </div>\n' +
+                    '      <div class="modal-footer">\n' +
+                    // '        <button type="button" class="btn btn-secondary" data-dismiss="modal"></button>\n' +
+                    // '        <button  type="button" class="btn btn-primary" data-dismiss="modal"></button>\n' +
+                    '      </div>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '</div>'
+                document.getElementById('posts').innerHTML = str
+
             })
     }
 
-    function createBlog() {
-        document.getElementById('blog').innerHTML =
-            `<input type="text" id="nameBlog">
-            <button onclick="saveNewBlog()">Create</button>`
-    }
+    // function createBlog() {
+    //     document.getElementById('blog').innerHTML =
+    //         `<input type="text" id="nameBlog">
+    //         <button onclick="saveNewBlog()">Create</button>`
+    // }
 
     function saveNewBlog() {
         console.log(    API_URL)
@@ -245,6 +281,23 @@
         })
 
     }
+    function viewBlog(id) {
+        axios.get(API_URL + '/' + id).then((res) => {
+            $('#exampleModal12').on('shown.bs.modal', function () {
+                document.getElementById('titleViewBlog').value = res.data.title;
+            });
+            $('#exampleModal12').on('shown.bs.modal', function () {
+                document.getElementById('idViewBlog').value = res.data.id;
+            });
+            $('#exampleModal12').on('shown.bs.modal', function () {
+                document.getElementById('contentViewBlog').value = res.data.content;
+            });
+            // Hiển thị modal
+            $('#exampleModal12').modal('show');
+        })
+
+    }
+
 
 
     function saveEditBlog() {
