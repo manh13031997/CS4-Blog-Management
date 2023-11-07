@@ -3,9 +3,8 @@ package com.example.cs4blogmanagement.controller;
 
 import com.example.cs4blogmanagement.model.Blog;
 import com.example.cs4blogmanagement.model.User;
-import com.example.cs4blogmanagement.service.posts.IBlogService;
+import com.example.cs4blogmanagement.service.blog.IBlogService;
 import com.example.cs4blogmanagement.service.user.IUserService;
-import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

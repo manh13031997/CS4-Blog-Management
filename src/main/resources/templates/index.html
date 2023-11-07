@@ -22,7 +22,6 @@
     </style>
     <script src="script.js"></script>
     <script src="function.js" ></script>
-    <!--    <script src="script.js"></script>-->
 
 </head>
 <body>
@@ -63,7 +62,7 @@
         </form>-->
         <div class="right">
             <div style="margin-right: 10px">
-                <p id="a">aa</p>
+                <p id="a"></p>
             </div>
             <button type="submit" onclick="logOut()">Logout</button>
         </div>
@@ -73,9 +72,9 @@
     <div id="posts"></div>
 </div>
 <script>
-    const API_URL = 'http://localhost:8080/blog'
-    const API_URL_USER = 'http://localhost:8080/comment'
-    const API_URL_POSTS = 'http://localhost:8080/user'
+    const API_URL = 'http://localhost:8081/blog'
+    const API_URL_USER = 'http://localhost:8081/comment'
+    const API_URL_POSTS = 'http://localhost:8081/user'
     loadListBlog()
     loadListBlogRemove()
     const data = {}
@@ -130,7 +129,7 @@
     </div>
   </div>
 </div>
-                            </div>
+</div>
                             <div class="input-group mb-3"  style="width: 600px">
   <input type="text" class="form-control" placeholder="viết bình luận" aria-label="Recipient's username" aria-describedby="button-addon2">
   <div class="input-group-append">

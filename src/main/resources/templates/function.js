@@ -1,21 +1,16 @@
-// let idLogin = localStorage.getItem("idLogin");
-let userName = localStorage.getItem("username");
 function login(){
-    axios.post("http://localhost:8080/users/login", {
+    axios.post("http://localhost:8081/users/login", {
         username: document.getElementById("usn").value,
         password: document.getElementById("pas").value
     }).then((response) => {
         let id = response.data.id;
-        let naa = response.data.username;
+        let usn = response.data.username;
         if (response.status === 200){
             alert("Login successful")
-            // let name = user.username
-            // let idd = user.id
-            // console.log(name,idd)
-            localStorage.setItem("username", naa);//luu id dang nhap vao localstrorage
+            localStorage.setItem("username", usn);//luu id dang nhap vao localstrorage
             localStorage.setItem("idLogin", id);
             redirectToForm("http://localhost:63342/CS4-Blog-Management/src/main/resources/templates/index.html?_ijt=c2q4jpdbiql6g4d86cabfl9dgk&_ij_reload=RELOAD_ON_SAVE")
-        } else if (response.data === "Username or password is incorrect"){
+        } else {
             alert("Username or password is incorrect")
             reloadPage()
         }
@@ -29,7 +24,7 @@ function login(){
      let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
      let phoneRegex = /^(03|05|07|08|09)\d{8}$/;
 
-     axios.post("http://localhost:8080/users/register", {
+     axios.post("http://localhost:8081/users/register", {
          username: document.getElementById("usn").value,
          age: document.getElementById("age").value,
          address: document.getElementById("address").value,

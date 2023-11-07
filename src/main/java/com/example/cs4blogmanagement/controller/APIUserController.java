@@ -42,7 +42,7 @@ public class APIUserController {
         if (user1 != null){
             return new ResponseEntity<>(user1, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
         }
     }
 
