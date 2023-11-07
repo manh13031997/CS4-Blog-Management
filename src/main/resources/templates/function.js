@@ -1,5 +1,5 @@
 function login(){
-    axios.post("http://localhost:8081/users/login", {
+    axios.post("http://localhost:8080/users/login", {
         username: document.getElementById("usn").value,
         password: document.getElementById("pas").value
     }).then((response) => {
@@ -25,7 +25,7 @@ function login(){
      let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
      let phoneRegex = /^(03|05|07|08|09)\d{8}$/;
 
-     axios.post("http://localhost:8081/users/register", {
+     axios.post("http://localhost:8080/users/register", {
          username: document.getElementById("usn").value,
          age: document.getElementById("age").value,
          address: document.getElementById("address").value,
