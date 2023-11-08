@@ -15,11 +15,12 @@ function deleteLocalStorage() {
     localStorage.removeItem("idLogin")
 }
 function loadUser() {
-    axios.get("http://localhost:8080/" + "user" + idLogin).then((res) =>{
+    axios.get("http://localhost:8080/" + "user" +"/"+ idLogin).then((res) =>{
+        +
         console.log(idLogin)
         let curUser = res.data
         console.log(curUser)
-        document.getElementById("a").innerHTML = `<span id="user" class="logo m-0 float-start">${curUser.username}</span>`;
+        document.getElementById("a ").innerHTML = `<span id="user" class="logo m-0 float-start">${curUser.username}</span>`;
         document.getElementById("b").innerHTML = `<img id="img" style="margin-left: 20px; width: 41px"
                             src=${curUser.image}
                             class="rounded-circle"
@@ -29,5 +30,5 @@ function loadUser() {
                 />`;
     })
 }
-loadUser();
+// loadUser();
 

@@ -41,4 +41,9 @@ public class CommentService implements ICommentService{
     public void restore(Long id) {
 
     }
+
+    @Override
+    public Iterable<Comment> findAllByBlogId(Long id) {
+        return commentRepository.findAllByBlogId(id);
+    }
 }

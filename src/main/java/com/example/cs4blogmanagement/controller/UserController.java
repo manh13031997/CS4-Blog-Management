@@ -62,6 +62,10 @@ public class UserController {
         userService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @PostMapping
+    public ResponseEntity<User> saveUser(@RequestBody User user){
+        userService.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

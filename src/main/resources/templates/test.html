@@ -67,7 +67,7 @@
   const API_URL_USER = 'http://localhost:8080/comment'
   const API_URL_POSTS = 'http://localhost:8080/user'
   loadListBlog()
-  loadListBlogRemove()
+  // loadListBlogRemove()
   const data = {}
   // loadListPosts()
   function test123() {
@@ -222,7 +222,7 @@
     }
     axios.put(API_URL + '/' + id, data).then(() => {
       loadListBlog();
-      loadListBlogRemove();
+      // loadListBlogRemove();
     });
   }
   function deleteBlog(id) {
@@ -230,7 +230,7 @@
     axios.delete(API_URL + '/' + id).then(() => {
       console.log(API_URL + '/' + id)
       loadListBlog();
-      loadListBlogRemove();
+      // loadListBlogRemove();
     });
   }
 
@@ -263,7 +263,7 @@
   function restoreBlog(id) {
     axios.put(API_URL + '/restore/' + id).then(() => {
       loadListBlog();
-      loadListBlogRemove();
+      // loadListBlogRemove();
     });
   }
 </script>

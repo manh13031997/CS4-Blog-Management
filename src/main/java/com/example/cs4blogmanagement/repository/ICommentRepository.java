@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICommentRepository extends JpaRepository<Comment, Long> {
     Iterable<Comment> findAllByContentContaining(String content);
+    Iterable<Comment> findAllByBlogId(Long id);
 }
