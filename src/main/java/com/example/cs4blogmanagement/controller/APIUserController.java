@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 
 
 @RestController
@@ -46,4 +47,13 @@ public class APIUserController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<User> edit(@PathVariable Long id, @RequestBody User user) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (!userOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        user.setId(userOptional.get().getId());
+        return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
+    }
 }

@@ -15,7 +15,7 @@ function deleteLocalStorage() {
     localStorage.removeItem("idLogin")
 }
 function loadUser() {
-    axios.get("http://localhost:8080/" + "user" + idLogin).then((res) =>{
+    axios.get("http://localhost:8081/" + "user" + "/" + idLogin).then((res) =>{
         console.log(idLogin)
         let curUser = res.data
         console.log(curUser)
@@ -29,5 +29,5 @@ function loadUser() {
                 />`;
     })
 }
-loadUser();
+// loadUser();
 
