@@ -62,20 +62,20 @@
 <!--        </form>-->
         <div class="right">
             <div style="margin-right: 10px">
-                <a href="" id="nameUser"></a>
+                <div onclick="viewUser(idLogin)" id="nameUser" data-toggle="modal" class="btn btn-warning" data-target="#exampleModal111"></div>
             </div>
-            <button type="submit" class="btn btn-secondary" onclick="logOut()">Logout</button>
+            <button type="submit" class="btn btn-secondary" onclick="logOut()" >Logout</button>
         </div>
     </div>
 </nav>
+<div id="viewUser"></div>
 <div class="container mt-5">
     <div id="posts"></div>
 </div>
 
 <script>
     const API_URL = 'http://localhost:8080/blog'
-    const API_URL_USER = 'http://localhost:8080/comment'
-    const API_URL_POSTS = 'http://localhost:8080/user'
+    const API_URL_USER = 'http://localhost:8080/user'
     const API_URL_COMMENT = 'http://localhost:8080/comment'
     loadListBlog()
     // loadListBlogRemove()
@@ -212,7 +212,7 @@
 </td>
 </tr>`
                 }
-                str += '</table>' +
+                str +=
                     '<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
                     '  <div class="modal-dialog">\n' +
                     '    <div class="modal-content">\n' +
@@ -247,7 +247,7 @@
                     '</div>'
                 document.getElementById('posts').innerHTML = str
 
-                str += '</table>' +
+                str +=
                     '<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel12" aria-hidden="true">\n' +
                     '  <div class="modal-dialog">\n' +
                     '    <div class="modal-content">\n' +
@@ -280,6 +280,41 @@
                     '  </div>\n' +
                     '</div>'
                 document.getElementById('posts').innerHTML = str
+
+               str += '</table>' +
+                   '<div class="modal fade" id="exampleModal111" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
+                   '  <div class="modal-dialog">\n' +
+                   '    <div class="modal-content">\n' +
+                   '      <div class="modal-header">\n' +
+                   '        <h5 class="modal-title" id="exampleModalLabel">user</h5>\n' +
+                   '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+                   '          <span aria-hidden="true">&times;</span>\n' +
+                   '        </button>\n' +
+                   '      </div>\n' +
+                   '      <div class="modal-body">\n' +
+                   '        ' +
+
+                   '  <div class="form-group">\n' +
+                   '    <input type="text" class="form-control" id="userName" aria-describedby="emailHelp" readonly>\n' +
+                   '    <input type="text" class="form-control" id="ageUser" aria-describedby="emailHelp">\n' +
+                   // '    <label for="exampleInputEmail1">Title</label>\n' +
+                   '    <input type="text" class="form-control" id="userAddress" aria-describedby="emailHelp">\n' +
+                   '  </div>\n' +
+                   '  <div class="form-group">\n' +
+                   // '    <label for="exampleInputPassword1">Content</label>\n' +
+
+                   '    <textarea class="form-control" id="userPhone" rows="3"></textarea>\n' +
+                   '  </div>\n' +
+
+                   '      </div>\n' +
+                   '      <div class="modal-footer">\n' +
+                   '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +
+                   '        <button onclick="saveEditBlog()" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>\n' +
+                   '      </div>\n' +
+                   '    </div>\n' +
+                   '  </div>\n' +
+                   '</div>'
+               document.getElementById('posts').innerHTML = str
 
             })
     }
@@ -425,6 +460,38 @@
         document.getElementById("comment")
 
     }
+   function viewUser(id){
+       // $("#exampleModal111").modal("hide");
+       axios.get(API_URL_USER + "/" + id).then((res) =>{
+
+           $('#exampleModal111').on('shown.bs.modal', function () {
+               document.getElementById('userName').value = res.data.username;
+           });
+           $('#exampleModal111').on('shown.bs.modal', function () {
+               document.getElementById('ageUser').value = res.data.age;
+           });
+           $('#exampleModal111').on('shown.bs.modal', function () {
+               document.getElementById('userAddress').value = res.data.address;
+           });
+           $('#exampleModal111').on('shown.bs.modal', function () {
+               document.getElementById('userPhone').value = res.data.phoneNumber;
+           });
+           // Hiển thị modal
+           $('#exampleModal111').modal('show');
+       })
+
+            // let str = '';
+            // str += `
+            // <p ${res.username}></p>
+            // <p ${res.age}></p>
+            // <p ${res.address}></p>
+            // <p ${res.phoneNumber}></p>
+            // <p ${res.email}></p>
+            // `
+           // document.getElementById("viewUser").innerHTML = str;
+       // })
+
+   }
 </script>
 <script src="script.js"></script>
 <script src="function.js" ></script>
