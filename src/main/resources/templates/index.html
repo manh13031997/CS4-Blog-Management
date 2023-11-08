@@ -41,17 +41,17 @@
                         Create blog
                 </a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
+<!--            <li class="nav-item dropdown">-->
+<!--                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">-->
+<!--                    Dropdown-->
+<!--                </a>-->
+<!--                <div class="dropdown-menu">-->
+<!--                    <a class="dropdown-item" href="#">Action</a>-->
+<!--                    <a class="dropdown-item" href="#">Another action</a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                </div>-->
+<!--            </li>-->
 <!--            <li class="nav-item">-->
 <!--                <a class="nav-link"></a>-->
 <!--            </li>-->
@@ -62,7 +62,7 @@
 <!--        </form>-->
         <div class="right">
             <div style="margin-right: 10px">
-                <span id="nameUser"></span>
+                <a href="" id="nameUser"></a>
             </div>
             <button type="submit" onclick="logOut()">Logout</button>
         </div>
@@ -76,8 +76,9 @@
     const API_URL = 'http://localhost:8080/blog'
     const API_URL_USER = 'http://localhost:8080/comment'
     const API_URL_POSTS = 'http://localhost:8080/user'
+    const API_URL_COMMENT = 'http://localhost:8080/comment'
     loadListBlog()
-    loadListBlogRemove()
+    // loadListBlogRemove()
     const data = {}
     // loadListPosts()
     function test123() {
@@ -100,8 +101,15 @@
     function loadListBlog() {
         document.getElementById("nameUser").innerHTML = `<p>${localStorage.getItem("username")}</p>`;
         document.getElementById('posts').innerHTML = ""
-            axios.get(API_URL).then((res) => {
-                let list = res.data;
+        Promise.all([
+            axios.get(API_URL),
+            axios.get(API_URL_COMMENT)
+        ])
+           .then((res) => {
+                let list = res[0].data;
+                let listComment = res[1].data;
+               console.log(list);
+               console.log(listComment);
                 let str = `<div class="blogBottom">
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -132,12 +140,12 @@
   </div>
 </div>
                             </div>
-                            <div class="input-group mb-3"  style="width: 600px">
-  <input type="text" class="form-control" placeholder="viết bình luận" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2">bình luận</button>
-  </div>
-</div>
+<!--<div class="input-group mb-3"  style="width: 500px">-->
+<!--  <input type="text" id="abc" class="form-control" placeholder="Viết bình luận" aria-label="Recipient's username" aria-describedby="button-addon2">-->
+<!--  <div class="input-group-append">-->
+<!--    <button class="btn btn-outline-secondary" type="button" id="button-addon2" >Bình luận</button>-->
+<!--  </div>-->
+<!--</div>-->
 
 
                        <table class="table">
@@ -149,8 +157,10 @@
                             </tr>`
 
                 for (let i = 0; i < list.length; i++) {
+
                     str += `<tr>
                             <td >${list[i].id}</td>
+
                             <td >${list[i].title}</td>
                             <td >
                             ${list[i].content}
@@ -160,16 +170,45 @@
                             <button onclick="editBlog(${list[i].id})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
                             Edit
                             </button>
-                             <button onclick="viewBlog(${list[i].id})" type="button" data-toggle="modal" data-target="#exampleModal12"> view </button>
+                             <button onclick="viewBlog(${list[i].id})"  type="button" data-toggle="modal" data-target="#exampleModal12"> view </button>
                             <a href="" onclick="deleteBlog(${list[i].id})">
                             <button type="button" class="btn btn-danger">
                             Delete
-                            </button>
+<!--                            </button>-->
                             </a>
                             </div>
                             </td>
-                        </tr>`
+                            <tr>
+                            <td colspan="3">Bình luận</td>
+                            <td></td>
+                            <td></td>
+</tr>`
+                    for (let j = 0; j < listComment.length; j++) {
+                        if(list[i].id === listComment[j].blog.id){
+                           str += ` <tr>
 
+                            <td colspan="3" id="comment">${listComment[j].user.username}-----${listComment[j].content}</td>
+                            <td></td>
+                            <td></td>
+</tr>`
+                        }
+                    }
+
+                    str +=  `  </tr>
+                        <tr>
+                        <td colspan="3">
+                        <div class="input-group mb-3"  style="width: 500px">
+  <input type="text" id="abc_${list[i].id}" class="form-control" placeholder="Viết bình luận" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="saveComment(${list[i].id})">Bình luận</button>
+  </div>
+</div>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>`
                 }
                 str += '</table>' +
                     '<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">\n' +
@@ -228,11 +267,11 @@
 
                     '    <textarea class="form-control" id="contentViewBlog" rows="3"></textarea>\n' +
                     '  </div>\n' +
-
+                 '   <div id="edit"></div>'+
                     '      </div>\n' +
                     '      <div class="modal-footer">\n' +
-                    // '        <button type="button" class="btn btn-secondary" data-dismiss="modal"></button>\n' +
-                    // '        <button  type="button" class="btn btn-primary" data-dismiss="modal"></button>\n' +
+                    '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit</button>\n' +
+                    '        <button  type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>\n' +
                     '      </div>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -266,6 +305,7 @@
 
 
     function editBlog(id) {
+            $("#exampleModal12").modal("hide");
         axios.get(API_URL + '/' + id).then((res) => {
             $('#exampleModal1').on('shown.bs.modal', function () {
                 document.getElementById('titleEditBlog').value = res.data.title;
@@ -292,8 +332,10 @@
             $('#exampleModal12').on('shown.bs.modal', function () {
                 document.getElementById('contentViewBlog').value = res.data.content;
             });
+
             // Hiển thị modal
             $('#exampleModal12').modal('show');
+
         })
 
     }
@@ -309,7 +351,7 @@
         }
         axios.put(API_URL + '/' + id, data).then(() => {
             loadListBlog();
-            loadListBlogRemove();
+            // loadListBlogRemove();
         });
     }
     function deleteBlog(id) {
@@ -317,7 +359,7 @@
         axios.delete(API_URL + '/' + id).then(() => {
             console.log(API_URL + '/' + id)
             loadListBlog();
-            loadListBlogRemove();
+            // loadListBlogRemove();
         });
     }
 
@@ -350,8 +392,32 @@
     function restoreBlog(id) {
         axios.put(API_URL + '/restore/' + id).then(() => {
             loadListBlog();
-            loadListBlogRemove();
+            // loadListBlogRemove();
         });
+    }
+    function saveComment(id){
+        const inputId = `abc_${id}`;
+
+        // Lấy giá trị từ input sử dụng id động
+        const content = document.getElementById(inputId).value;
+        let data =
+            {
+                content: content,
+                user: {
+                    id: idLogin,
+                },
+                blog: {
+                    id: id
+                }
+            }
+            axios.post(API_URL_COMMENT, data).then(()=>{
+            loadListBlog()
+        })
+
+    }
+    function showAllCommentByBlog(id){
+        document.getElementById("comment")
+
     }
 </script>
 <script src="script.js"></script>

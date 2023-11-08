@@ -61,4 +61,9 @@ public class CommentController {
         commentService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @PostMapping
+    public ResponseEntity<Comment> saveComment(@RequestBody Comment comment){
+        commentService.save(comment);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
