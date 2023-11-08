@@ -20,8 +20,6 @@
         }
 
     </style>
-    <script src="script.js"></script>
-    <script src="function.js" ></script>
 
 </head>
 <body>
@@ -56,13 +54,13 @@
 <!--                <a class="nav-link"></a>-->
 <!--            </li>-->
         </ul>
-    <!--    <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>-->
+<!--        <form class="form-inline my-2 my-lg-0" style="margin-right: 200px">-->
+<!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="yc">-->
+<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="timKiem()">Search</button>-->
+<!--        </form>-->
         <div class="right">
             <div style="margin-right: 10px">
-                <p id="a"></p>
+                <span id="nameUser"></span>
             </div>
             <button type="submit" onclick="logOut()">Logout</button>
         </div>
@@ -71,6 +69,7 @@
 <div class="container mt-5">
     <div id="posts"></div>
 </div>
+
 <script>
     const API_URL = 'http://localhost:8080/blog'
     const API_URL_USER = 'http://localhost:8080/comment'
@@ -97,6 +96,7 @@
             });
     }
     function loadListBlog() {
+        document.getElementById("nameUser").innerHTML = `<p>${localStorage.getItem("username")}</p>`;
         document.getElementById('posts').innerHTML = ""
             axios.get(API_URL).then((res) => {
                 let list = res.data;
@@ -111,7 +111,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+
   <div class="form-group">
     <label for="exampleInputEmail1">Title</label>
     <input type="text" class="form-control" id="titleCreateBlog" aria-describedby="emailHelp">
@@ -120,7 +120,7 @@
     <label for="exampleInputPassword1">Content</label>
     <textarea class="form-control" id="contentCreateBlog" rows="3"></textarea>
   </div>
-</form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -129,7 +129,7 @@
     </div>
   </div>
 </div>
-</div>
+                            </div>
                             <div class="input-group mb-3"  style="width: 600px">
   <input type="text" class="form-control" placeholder="viết bình luận" aria-label="Recipient's username" aria-describedby="button-addon2">
   <div class="input-group-append">
@@ -141,9 +141,10 @@
                        <table class="table">
                             <tr>
                                 <th scope="row" class="col" style="width: 50px ">#</th>
-                                <th class="col">title blog</th>
-                                <th class="col">content blog</th>
-                                <th class="col" colspan="2">Action</th>
+                                <th class="col">Title</th>
+                                <th class="col">Content</th>
+                                <th class="col">Posting time</th>
+                                <th class="col" colspan="3" style="text-align: center">Action</th>
                             </tr>`
 
                 for (let i = 0; i < list.length; i++) {
@@ -153,11 +154,13 @@
                             <td >
                             ${list[i].content}
                             </td>
+                            <td >${list[i].time}</td>
                             <td>
                             <div style="display: flex">
-                            <button onclick="editBlog(${list[i].id})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
+                            <button onclick="editBlog(${list[i].id})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1" style="margin-right: 5px">
                             Edit
-                    </button>
+                            </button>
+                             <button onclick="viewBlog(${list[i].id})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal12" style="margin-right: 5px">View</button>
                             <a href="" onclick="deleteBlog(${list[i].id})">
                             <button type="button" class="btn btn-danger">
                             Delete
@@ -180,9 +183,10 @@
                     '      </div>\n' +
                     '      <div class="modal-body">\n' +
                     '        ' +
-                    '<form>\n' +
+
                     '  <div class="form-group">\n' +
                     '    <input type="hidden" class="form-control" id="idEditBlog" aria-describedby="emailHelp">\n' +
+                    '    <input type="hidden" class="form-control" id="timeEditBlog" aria-describedby="emailHelp">\n' +
                     '    <label for="exampleInputEmail1">Title</label>\n' +
                     '    <input type="text" class="form-control" id="titleEditBlog" aria-describedby="emailHelp">\n' +
                     '  </div>\n' +
@@ -191,7 +195,7 @@
 
                     '    <textarea class="form-control" id="contentEditBlog" rows="3"></textarea>\n' +
                     '  </div>\n' +
-                    '</form>' +
+
                     '      </div>\n' +
                     '      <div class="modal-footer">\n' +
                     '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n' +
@@ -201,20 +205,58 @@
                     '  </div>\n' +
                     '</div>'
                 document.getElementById('posts').innerHTML = str
+
+                str += '</table>' +
+                    '<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel12" aria-hidden="true">\n' +
+                    '  <div class="modal-dialog">\n' +
+                    '    <div class="modal-content">\n' +
+                    '      <div class="modal-header">\n' +
+                    '        <h5 class="modal-title" id="exampleModalLabel12">View blog</h5>\n' +
+                    '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+                    '          <span aria-hidden="true">&times;</span>\n' +
+                    '        </button>\n' +
+                    '      </div>\n' +
+                    '      <div class="modal-body">\n' +
+                    '        ' +
+
+                    '  <div class="form-group">\n' +
+                    '    <input type="hidden" class="form-control" id="idViewBlog" aria-describedby="emailHelp">\n' +
+                    '    <label for="exampleInputEmail12">Title</label>\n' +
+                    '    <input type="text" class="form-control" id="titleViewBlog" readonly>\n' +
+                    '  </div>\n' +
+                    '  <div class="form-group">\n' +
+                    '    <label for="exampleInputPassword1">Content</label>\n' +
+
+                    '    <textarea class="form-control" id="contentViewBlog" rows="3" readonly></textarea>\n' +
+                    '  </div>\n' +
+
+                    '      </div>\n' +
+                    '      <div class="modal-footer">\n' +
+                    // '        <button type="button" class="btn btn-secondary" data-dismiss="modal"></button>\n' +
+                    // '        <button  type="button" class="btn btn-primary" data-dismiss="modal"></button>\n' +
+                    '      </div>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '</div>'
+                document.getElementById('posts').innerHTML = str
+
             })
     }
 
-    function createBlog() {
-        document.getElementById('blog').innerHTML =
-            `<input type="text" id="nameBlog">
-            <button onclick="saveNewBlog()">Create</button>`
-    }
+    // function createBlog() {
+    //     document.getElementById('blog').innerHTML =
+    //         `<input type="text" id="nameBlog">
+    //         <button onclick="saveNewBlog()">Create</button>`
+    // }
 
     function saveNewBlog() {
         console.log(    API_URL)
         let data = {
             title: document.getElementById('titleCreateBlog').value,
-            content: document.getElementById('contentCreateBlog').value
+            content: document.getElementById('contentCreateBlog').value,
+            user:{
+                id: localStorage.getItem("idLogin")
+            }
         }
 
         axios.post(API_URL, data).then(() => {
@@ -235,11 +277,31 @@
             $('#exampleModal1').on('shown.bs.modal', function () {
                 document.getElementById('contentEditBlog').value = res.data.content;
             });
+            $('#exampleModal1').on('shown.bs.modal', function () {
+                document.getElementById('timeEditBlog').value = res.data.time;
+            });
             // Hiển thị modal
             $('#exampleModal1').modal('show');
         })
 
     }
+    function viewBlog(id) {
+        axios.get(API_URL + '/' + id).then((res) => {
+            $('#exampleModal12').on('shown.bs.modal', function () {
+                document.getElementById('titleViewBlog').value = res.data.title;
+            });
+            $('#exampleModal12').on('shown.bs.modal', function () {
+                document.getElementById('idViewBlog').value = res.data.id;
+            });
+            $('#exampleModal12').on('shown.bs.modal', function () {
+                document.getElementById('contentViewBlog').value = res.data.content;
+            });
+            // Hiển thị modal
+            $('#exampleModal12').modal('show');
+        })
+
+    }
+
 
 
     function saveEditBlog() {
@@ -258,8 +320,8 @@
         console.log(id)
         axios.delete(API_URL + '/' + id).then(() => {
             console.log(API_URL + '/' + id)
-            loadListBlog();
-            loadListBlogRemove();
+                loadListBlogRemove();
+                loadListBlog();
         });
     }
 
@@ -296,5 +358,7 @@
         });
     }
 </script>
+<script src="script.js"></script>
+<script src="function.js" ></script>
 </body>
 </html>
