@@ -64,7 +64,7 @@
             <div style="margin-right: 10px">
                 <a href="" id="nameUser"></a>
             </div>
-            <button type="submit" onclick="logOut()">Logout</button>
+            <button type="submit" class="btn btn-secondary" onclick="logOut()">Logout</button>
         </div>
     </div>
 </nav>
@@ -153,7 +153,8 @@
                                 <th scope="row" class="col" style="width: 50px ">#</th>
                                 <th class="col">title blog</th>
                                 <th class="col">content blog</th>
-                                <th class="col" colspan="2">Action</th>
+                                <th class="col">posting time</th>
+                                <th class="col" colspan="3" style="text-align: center">Action</th>
                             </tr>`
 
                 for (let i = 0; i < list.length; i++) {
@@ -165,12 +166,13 @@
                             <td >
                             ${list[i].content}
                             </td>
+                            <td>${list[i].time}</td>
                             <td>
                             <div style="display: flex">
-                            <button onclick="editBlog(${list[i].id})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
+                            <button onclick="editBlog(${list[i].id})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1" style="margin-right: 5px">
                             Edit
                             </button>
-                             <button onclick="viewBlog(${list[i].id})"  type="button" data-toggle="modal" data-target="#exampleModal12"> view </button>
+                             <button onclick="viewBlog(${list[i].id})"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal12" style="margin-right: 5px"> view </button>
                             <a href="" onclick="deleteBlog(${list[i].id})">
                             <button type="button" class="btn btn-danger">
                             Delete
@@ -225,6 +227,7 @@
 
                     '  <div class="form-group">\n' +
                     '    <input type="hidden" class="form-control" id="idEditBlog" aria-describedby="emailHelp">\n' +
+                    '    <input type="hidden" class="form-control" id="timeEditBlog" aria-describedby="emailHelp">\n' +
                     '    <label for="exampleInputEmail1">Title</label>\n' +
                     '    <input type="text" class="form-control" id="titleEditBlog" aria-describedby="emailHelp">\n' +
                     '  </div>\n' +
@@ -249,7 +252,7 @@
                     '  <div class="modal-dialog">\n' +
                     '    <div class="modal-content">\n' +
                     '      <div class="modal-header">\n' +
-                    '        <h5 class="modal-title" id="exampleModalLabel12">Edit blog</h5>\n' +
+                    '        <h5 class="modal-title" id="exampleModalLabel12">View blog</h5>\n' +
                     '        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
                     '          <span aria-hidden="true">&times;</span>\n' +
                     '        </button>\n' +
@@ -260,18 +263,18 @@
                     '  <div class="form-group">\n' +
                     '    <input type="hidden" class="form-control" id="idViewBlog" aria-describedby="emailHelp">\n' +
                     '    <label for="exampleInputEmail12">Title</label>\n' +
-                    '    <input type="text" class="form-control" id="titleViewBlog">\n' +
+                    '    <input type="text" class="form-control" id="titleViewBlog" readonly>\n' +
                     '  </div>\n' +
                     '  <div class="form-group">\n' +
                     '    <label for="exampleInputPassword1">Content</label>\n' +
 
-                    '    <textarea class="form-control" id="contentViewBlog" rows="3"></textarea>\n' +
+                    '    <textarea class="form-control" id="contentViewBlog" rows="3" readonly></textarea>\n' +
                     '  </div>\n' +
                  '   <div id="edit"></div>'+
-                    '      </div>\n' +
+                    '      <div>\n' +
                     '      <div class="modal-footer">\n' +
-                    '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit</button>\n' +
-                    '        <button  type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>\n' +
+                    // '        <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit</button>\n' +
+                    // '        <button  type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>\n' +
                     '      </div>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -315,6 +318,9 @@
             });
             $('#exampleModal1').on('shown.bs.modal', function () {
                 document.getElementById('contentEditBlog').value = res.data.content;
+            });
+            $('#exampleModal1').on('shown.bs.modal', function () {
+                document.getElementById('timeEditBlog').value = res.data.time;
             });
             // Hiển thị modal
             $('#exampleModal1').modal('show');
